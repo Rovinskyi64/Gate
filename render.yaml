@@ -1,0 +1,16 @@
+services:
+  - type: worker
+    name: gate-lending-watcher
+    env: python
+    plan: free
+    region: frankfurt
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "python gate_uniloan_watcher_bot.py"
+    autoDeploy: true
+    envVars:
+      - key: TG_BOT_TOKEN
+        sync: false
+      - key: TG_CHAT_ID
+        sync: false
+      - key: POLL_INTERVAL_SECONDS
+        value: "15"
